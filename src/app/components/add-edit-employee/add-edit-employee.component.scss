@@ -1,0 +1,21 @@
+.input-wrapper{
+    display: flex;
+    flex-direction: column;
+}
+
+.field-wrapper{
+    display: flex;
+    column-gap: 40px;
+
+}
+
+.form-container{
+    margin: 50px;
+}
+input{
+    width: 400px;
+}
+h1{
+    font-weight:600;
+    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
