@@ -22,7 +22,9 @@ export class DisplayEmployeeComponent implements OnInit{
   addEmployee() {
     this.router.navigate(['/add-edit'])
   }
-
+  editEmployee(employeeId: string) {
+    this.router.navigate(['/edit', employeeId]);
+  }
   deleteEmployee(index: number) {
     const employeeName = this.employee[index].name;
     const confirmation = confirm(`Are you sure want to delete ${employeeName}?`);

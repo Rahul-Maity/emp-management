@@ -10,7 +10,8 @@ import { AddEditEmployeeComponent } from './components/add-edit-employee/add-edi
 import {  RouterModule, Routes } from '@angular/router';
 const routes: Routes = [
   { path: '', component: DisplayEmployeeComponent },
-  { path: 'add-edit', component: AddEditEmployeeComponent }
+  { path: 'add-edit', component: AddEditEmployeeComponent },
+  {path:'edit/:id',component:AddEditEmployeeComponent}
 ];
 @NgModule({
   declarations: [

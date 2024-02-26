@@ -3,18 +3,21 @@ import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
 import { Employee } from '../../models/employee.model';
 import { EmployeeService } from '../../services/employee.service';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-add-edit-employee',
   templateUrl: './add-edit-employee.component.html',
   styleUrls: ['./add-edit-employee.component.scss']
 })
-export class AddEditEmployeeComponent  {
+export class AddEditEmployeeComponent implements OnInit  {
   faTrash = faTrash;
   employees: Employee[] = [];
   employeeForm!: FormGroup;
-  constructor(private fb: FormBuilder, private employeeService: EmployeeService, private router: Router) {
+  isEdit: boolean = false;
+  // employeeId: string | null = null;
+  employeeId: string = '';
+  constructor(private fb: FormBuilder, private employeeService: EmployeeService, private router: Router,private route:ActivatedRoute) {
     this.employeeForm = this.fb.group({
       employeeId: [''],
       name: [''],
@@ -28,6 +31,38 @@ export class AddEditEmployeeComponent  {
       ]),
       gender: [''] // Assuming gender is a single value, not an array
   });
+  }
+  ngOnInit(): void {
+    this.route.params.subscribe(params => {
+      if (params['id']) {
+        this.isEdit = true;
+        this.employeeId = params['id'];
+        const employee = this.employeeService.getEmployeeById(this.employeeId);
+        if (employee) {
+          this.populateForm(employee);
+        }
+        else {
+          console.log('employee not found');
+        }
+      }
+    });
+  }
+
+  populateForm(employee: Employee) {
+    this.employeeForm.patchValue({
+      employeeId: employee.employeeId,
+      name: employee.name,
+      contactNumber: employee.contactNumber,
+      email: employee.email,
+      gender: employee.gender
+    });
+    this.employeeForm.setControl('skills', this.fb.array([]));
+    employee.skills.forEach(skill => {
+      this.skillForms.push(this.fb.group({
+        skillName: skill.skillName,
+        experience: skill.experience
+      }));
+    });
   }
 
 
@@ -59,7 +94,13 @@ export class AddEditEmployeeComponent  {
         gender: this.employeeForm.value.gender,
         skills: this.employeeForm.value.skills
       };
-      this.employeeService.employees.push(newEmployee);
+      // this.employeeService.employees.push(newEmployee);
+      if (this.isEdit && this.employeeId) {
+        this.employeeService.updateEmployee(this.employeeId, newEmployee);
+      }
+      else {
+        this.employeeService.addEmployee(newEmployee);
+      }
      
       this.employeeForm.reset();
       this.router.navigate(['/']);
