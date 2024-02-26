@@ -1,16 +1,87 @@
 <div class="form-container">
     <h1>Add Employee</h1>
+    <form [formGroup]="employeeForm" #myForm="ngForm" (ngSubmit)="onSubmit()">
     <div class="field-wrapper">
+
         <div class="input-wrapper">
             <label for="employeeId">Employee Id:</label>
-    <input type="text" placeholder="Enter Id">
+    <input type="text" placeholder="Enter Id" formControlName="employeeId">
         </div>
         <div class="input-wrapper">
             <label for="Name">Name:</label>
-            <input type="text" placeholder="Enter Name">
+            <input type="text" placeholder="Enter Name" formControlName="name">
+        </div>
+    </div>
+    <div class="field-wrapper"> 
+        <div class="input-wrapper">
+            <label for="contactNumber">Contact Number:</label>
+    <input type="text" placeholder="Enter Contact Number" formControlName="contactNumber">
+        </div>
+        <div class="input-wrapper">
+            <label for="Name">Email:</label>
+            <input type="text" placeholder="Enter Email" formControlName="email">
+        </div>
+    </div>
+    <div class="field-wrapper">
+        <div class="input-wrapper" formArrayName="skills"  >
+           
+                <div class="skill-heading">
+                    <label for="skill">Skill:</label>
+                    <button (click)="addSkill()">Add Skill +</button>
+                   </div>
+<ng-container *ngIf="skillForms.controls.length>1;else noId">
+    <div class="dynamic-content-wrapper" id="dynamic-style" >
+        <div class="skill-input"  *ngFor="let skill of skillForms.controls; let i = index" [formGroupName]="i">
+         <input type="text" placeholder="Enter skill name" formControlName="skillName"  >
+         <select name="skill" id="skill" aria-placeholder="Select Experience" formControlName="experience">
+             <option value="one">1 Year</option>
+             <option value="two">2 Year</option>
+             <option value="plus-two">2 Year +</option>
+         </select>
+ 
+         <!-- <button *ngIf="skillForms.controls.length>1" type="button" (click)="removeSkill(i)">Delete</button> -->
+         <fa-icon  [icon]="faTrash" id="icon-edit"  *ngIf="skillForms.controls.length>1"  (click)="removeSkill(i)" ></fa-icon>
+        </div>
+       
+ </div>
+</ng-container>
+<ng-template #noId>
+    <div class="dynamic-content-wrapper"  >
+        <div class="skill-input"  *ngFor="let skill of skillForms.controls; let i = index" [formGroupName]="i">
+         <input type="text" placeholder="Enter skill name" formControlName="skillName"  >
+         <select name="skill" id="skill" aria-placeholder="Select Experience" formControlName="experience">
+             <option value="one">1 Year</option>
+             <option value="two">2 Year</option>
+             <option value="plus-two">2 Year +</option>
+         </select>
+ 
+         <!-- <button *ngIf="skillForms.controls.length>1" type="button" (click)="removeSkill(i)">Delete</button> -->
+         <fa-icon  [icon]="faTrash" id="icon-edit"  *ngIf="skillForms.controls.length>1"  (click)="removeSkill(i)" ></fa-icon>
+        </div>
+ </div>
+</ng-template>
+
+                   
+
+        </div>
+        <div class="input-wrapper">
+
+          <div class="gender-heading">
+            <label for="gender">Gender:</label>
+          </div>
+          <div class="gender-input">
+            <div class="male-input">
+                <input type="radio"name="gender" id="male" formControlName="gender" value="male" >
+                <label for="male">Male</label>
+            </div>
+            <div class="female-input">
+                <input type="radio" name="gender" id="female"  formControlName="gender" value="female" >
+                <label for="female">Female</label>
+            </div>
+          </div>
         </div>
     </div>
 
-
-
+<button class="btn-submit" type="submit" >Submit</button>
+</form>
 </div>

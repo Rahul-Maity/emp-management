@@ -1,7 +1,10 @@
 
 <div >
+  <div id="successMessage"></div>
+  <div class="form-content">
 
-  <button class="btn">Add Employee</button>
+
+  <button class="btn" (click)="addEmployee()">Add Employee</button>
 <table class="table table-striped">
     <thead>
       <tr>
@@ -15,36 +18,34 @@
       </tr>
     </thead>
     <tbody>
-      <tr>
-        <th scope="row">1</th>
-        <td>Mark</td>
-        <td>markgmail.com</td>
-        <td>9932959206</td>
-        <td>Male</td>
-        <td>HTML ( EXP - 4 years )</td>
-        <td><fa-icon [icon]="faEdit"></fa-icon><fa-icon [icon]="faTrash"></fa-icon></td>
+      <tr *ngFor="let employee of employee;let i=index">
+        <td>
+          {{employee.employeeId}}
+        </td>
+        <td>
+          {{employee.name}}
+        </td>
+        <td>
+          {{employee.email}}
+        </td>
+        <td>
+          {{employee.contactNumber}}
+        </td>
+        <td>
+          {{employee.gender}}
+        </td>
+        <td>
+         
+            <li *ngFor="let skill of employee.skills">
+              {{skill.skillName}} {{skill.experience}}
+            </li>
+         
+        </td>
+        <td><fa-icon [icon]="faEdit"></fa-icon><fa-icon [icon]="faTrash" (click)="deleteEmployee(i)" ></fa-icon></td>
       </tr>
-      <tr>
-        <th scope="row">1</th>
-        <td>Mark</td>
-        <td>markgmail.com</td>
-        <td>9932959206</td>
-        <td>Male</td>
-        <td>HTML ( EXP - 4 years )</td>
-        <td><fa-icon [icon]="faEdit"></fa-icon><fa-icon [icon]="faTrash"></fa-icon></td>
-      </tr>
-      <tr>
-        <th scope="row">1</th>
-        <td>Mark</td>
-        <td>markgmail.com</td>
-        <td>9932959206</td>
-        <td>Male</td>
-        <td>HTML ( EXP - 4 years )</td>
-        <td><fa-icon [icon]="faEdit"></fa-icon><fa-icon [icon]="faTrash"></fa-icon></td>
-      </tr>
+
+ 
       <tbody>
   </table>
-
-
-
+</div>
 </div>

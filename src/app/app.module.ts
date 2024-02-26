@@ -7,18 +7,27 @@ import { DisplayEmployeeComponent } from './components/display-employee/display-
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { ReactiveFormsModule } from '@angular/forms';
 import { AddEditEmployeeComponent } from './components/add-edit-employee/add-edit-employee.component';
-
+import {  RouterModule, Routes } from '@angular/router';
+const routes: Routes = [
+  { path: '', component: DisplayEmployeeComponent },
+  { path: 'add-edit', component: AddEditEmployeeComponent }
+];
 @NgModule({
   declarations: [
     AppComponent,
     DisplayEmployeeComponent,
-    AddEditEmployeeComponent
+    AddEditEmployeeComponent,
+
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FontAwesomeModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    RouterModule.forRoot(routes)
+    
+
+    
   ],
   providers: [],
   bootstrap: [AppComponent]
