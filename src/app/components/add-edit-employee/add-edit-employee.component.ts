@@ -101,7 +101,7 @@ export class AddEditEmployeeComponent implements OnInit  {
       else {
         this.employeeService.addEmployee(newEmployee);
       }
-     
+
       this.employeeForm.reset();
       this.router.navigate(['/']);
     }
