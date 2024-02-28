@@ -1,22 +1,29 @@
+
+<!-- Container for the employee form -->
 <div class="form-container">
     <h1>Add Employee</h1>
+      <!-- Form for adding an employee -->
     <form [formGroup]="employeeForm" #myForm="ngForm" (ngSubmit)="onSubmit()">
     <div class="field-wrapper">
-
+    <!-- Field for employee ID -->
         <div class="input-wrapper">
             <label for="employeeId">Employee Id:</label>
     <input type="text" placeholder="Enter Id" formControlName="employeeId">
         </div>
+          <!-- Field for employee Name -->
         <div class="input-wrapper">
             <label for="Name">Name:</label>
             <input type="text" placeholder="Enter Name" formControlName="name">
         </div>
     </div>
+
     <div class="field-wrapper"> 
+          <!-- Field for contact number -->
         <div class="input-wrapper">
             <label for="contactNumber">Contact Number:</label>
     <input type="text" placeholder="Enter Contact Number" formControlName="contactNumber">
         </div>
+           <!-- Field for email -->
         <div class="input-wrapper">
             <label for="Name">Email:</label>
             <input type="text" placeholder="Enter Email" formControlName="email">
@@ -29,6 +36,8 @@
                     <label for="skill">Skill:</label>
                     <button (click)="addSkill()">Add Skill +</button>
                    </div>
+                     <!-- Skill input section -->
+                <!-- Check if there are multiple skills or not -->
 <ng-container *ngIf="skillForms.controls.length>1;else noId">
     <div class="dynamic-content-wrapper" id="dynamic-style" >
         <div class="skill-input"  *ngFor="let skill of skillForms.controls; let i = index" [formGroupName]="i">
@@ -41,9 +50,10 @@
  
          <fa-icon  [icon]="faTrash" id="icon-edit"  *ngIf="skillForms.controls.length>1"  (click)="removeSkill(i)" ></fa-icon>
         </div>
-       
+
  </div>
 </ng-container>
+   <!-- Template for when there's only one skill -->
 <ng-template #noId>
     <div class="dynamic-content-wrapper"  >
         <div class="skill-input"  *ngFor="let skill of skillForms.controls; let i = index" [formGroupName]="i">
@@ -59,9 +69,8 @@
  </div>
 </ng-template>
 
-                   
-
         </div>
+          <!-- Field for gender -->
         <div class="input-wrapper">
 
           <div class="gender-heading">
@@ -79,7 +88,7 @@
           </div>
         </div>
     </div>
-
+ <!-- Button to submit the form -->
 <button class="btn-submit" type="submit" >Submit</button>
 </form>
 </div>

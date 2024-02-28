@@ -1,12 +1,14 @@
-
 <div >
+  <!-- Container for displaying success messages -->
   <div id="successMessage"></div>
+  <!-- Container for the form and employee table -->
   <div class="form-content">
-
-
+  <!-- Button to add a new employee -->
   <button class="btn" (click)="addEmployee()">Add Employee</button>
+   <!-- Table to display employee data -->
 <table class="table table-striped">
     <thead>
+          <!-- Table headers -->
       <tr>
         <th scope="col">Id</th>
         <th scope="col">Name</th>
@@ -18,6 +20,7 @@
       </tr>
     </thead>
     <tbody>
+       <!-- Loop through each employee -->
       <tr *ngFor="let employee of employee;let i=index">
         <td>
           {{employee.employeeId}}
@@ -35,6 +38,7 @@
           {{employee.gender}}
         </td>
         <td>
+           <!-- Loop through each employee -->
           <div style="list-style: none;">
             <ng-container *ngFor="let skill of employee.skills; let i = index;">
                 <div>
@@ -45,6 +49,7 @@
   
          
         </td>
+          <!-- Icons for editing and deleting an employee -->
         <td><fa-icon [icon]="faEdit" (click)="editEmployee(employee.employeeId)"  ></fa-icon><fa-icon [icon]="faTrash" (click)="deleteEmployee(i)" ></fa-icon></td>
       </tr>
 

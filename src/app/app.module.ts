@@ -18,7 +18,6 @@ const routes: Routes = [
     AppComponent,
     DisplayEmployeeComponent,
     AddEditEmployeeComponent,
-
   ],
   imports: [
     BrowserModule,
@@ -26,9 +25,7 @@ const routes: Routes = [
     FontAwesomeModule,
     ReactiveFormsModule,
     RouterModule.forRoot(routes)
-    
 
-    
   ],
   providers: [],
   bootstrap: [AppComponent]
